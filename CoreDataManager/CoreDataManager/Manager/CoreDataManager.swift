@@ -43,13 +43,16 @@ struct CoreDataManager: ICoreDataManager {
 
    // save
    func saveSingleItem<T: NSManagedObject>(object: T) {
-      let object = object
-      container.viewContext.insert(object)
+      var entity = T(context: container.viewContext)
+      entity = object
       try? coreSave()
    }
 
    func saveMultipleItems<T>(objects: [T]) where T: NSManagedObject {
-      objects.forEach { container.viewContext.insert($0) }
+      objects.forEach {
+         var entity = T(context: container.viewContext)
+         entity = $0
+      }
       try? coreSave()
    }
 
@@ -71,5 +74,50 @@ struct CoreDataManager: ICoreDataManager {
          }
       }
       try? coreSave()
+   }
+
+   // fetch
+   func fetchSingular<T: NSManagedObject>(object: T) -> T? {
+      let request = NSFetchRequest<T>(entityName: "\(object)")
+      let queue = queueGenerator("FetchQue")
+      var result: T?
+      queue.async {
+         let results = fetchRequest(request: request)
+         let accured = results?.filter { $0 == object }.first
+         DispatchQueue.main.async {
+            result = accured
+         }
+      }
+      return result
+   }
+
+   func fetchMultiple<T>() -> [T]? where T: NSManagedObject {
+      let request = NSFetchRequest<T>(entityName: "\(T.self)")
+      let queue = queueGenerator("FetchQue")
+      var result : [T]?
+      queue.async {
+         result = fetchRequest(request: request)
+      }
+      return result
+   }
+
+   // misc
+   private func queueGenerator(_ queueLabel: String) -> DispatchQueue {
+      let queue = DispatchQueue(
+         label: queueLabel, qos: .background,
+         attributes: .concurrent,
+         autoreleaseFrequency: .inherit, target: .main)
+
+      return queue
+   }
+
+   private func fetchRequest<T: NSManagedObject>(request: NSFetchRequest<T>) -> [T]? {
+      var results = [T]()
+      do {
+         results = try container.viewContext.fetch(request)
+      } catch let e {
+         print("Error while fetching entity : \(e.localizedDescription)")
+      }
+      return results
    }
 }
