@@ -7,21 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46837583285623AC00FD4254 /* ContainerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 46837581285623AC00FD4254 /* ContainerModel.xcdatamodeld */; };
 		46AAC6D6285546BF008BABCE /* CoreDataManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AAC6D5285546BF008BABCE /* CoreDataManagerApp.swift */; };
 		46AAC6DA285546C2008BABCE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46AAC6D9285546C2008BABCE /* Assets.xcassets */; };
 		46AAC6DD285546C2008BABCE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46AAC6DC285546C2008BABCE /* Preview Assets.xcassets */; };
-		46AAC6E2285546C2008BABCE /* CoreDataManager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 46AAC6E0285546C2008BABCE /* CoreDataManager.xcdatamodeld */; };
 		46AAC6ED28554B3B008BABCE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AAC6EC28554B3B008BABCE /* CoreDataManager.swift */; };
 		46AAC6EF285555EB008BABCE /* ICoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AAC6EE285555EB008BABCE /* ICoreDataManager.swift */; };
 		46AAC6F228561418008BABCE /* ExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AAC6F128561418008BABCE /* ExampleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		46837582285623AC00FD4254 /* ContainerModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ContainerModel.xcdatamodel; sourceTree = "<group>"; };
 		46AAC6D2285546BF008BABCE /* CoreDataManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46AAC6D5285546BF008BABCE /* CoreDataManagerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerApp.swift; sourceTree = "<group>"; };
 		46AAC6D9285546C2008BABCE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		46AAC6DC285546C2008BABCE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		46AAC6E1285546C2008BABCE /* CoreDataManager.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataManager.xcdatamodel; sourceTree = "<group>"; };
 		46AAC6EC28554B3B008BABCE /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		46AAC6EE285555EB008BABCE /* ICoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICoreDataManager.swift; sourceTree = "<group>"; };
 		46AAC6F128561418008BABCE /* ExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleView.swift; sourceTree = "<group>"; };
@@ -61,8 +61,8 @@
 				46AAC6E928554A76008BABCE /* Manager */,
 				46AAC6D5285546BF008BABCE /* CoreDataManagerApp.swift */,
 				46AAC6D9285546C2008BABCE /* Assets.xcassets */,
-				46AAC6E0285546C2008BABCE /* CoreDataManager.xcdatamodeld */,
 				46AAC6DB285546C2008BABCE /* Preview Content */,
+				46837581285623AC00FD4254 /* ContainerModel.xcdatamodeld */,
 			);
 			path = CoreDataManager;
 			sourceTree = "<group>";
@@ -163,7 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46AAC6ED28554B3B008BABCE /* CoreDataManager.swift in Sources */,
-				46AAC6E2285546C2008BABCE /* CoreDataManager.xcdatamodeld in Sources */,
+				46837583285623AC00FD4254 /* ContainerModel.xcdatamodeld in Sources */,
 				46AAC6EF285555EB008BABCE /* ICoreDataManager.swift in Sources */,
 				46AAC6D6285546BF008BABCE /* CoreDataManagerApp.swift in Sources */,
 				46AAC6F228561418008BABCE /* ExampleView.swift in Sources */,
@@ -369,13 +369,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		46AAC6E0285546C2008BABCE /* CoreDataManager.xcdatamodeld */ = {
+		46837581285623AC00FD4254 /* ContainerModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				46AAC6E1285546C2008BABCE /* CoreDataManager.xcdatamodel */,
+				46837582285623AC00FD4254 /* ContainerModel.xcdatamodel */,
 			);
-			currentVersion = 46AAC6E1285546C2008BABCE /* CoreDataManager.xcdatamodel */;
-			path = CoreDataManager.xcdatamodeld;
+			currentVersion = 46837582285623AC00FD4254 /* ContainerModel.xcdatamodel */;
+			path = ContainerModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

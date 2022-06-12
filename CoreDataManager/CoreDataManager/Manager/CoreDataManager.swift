@@ -11,19 +11,20 @@ import SwiftUI
 import UIKit
 
 struct CoreDataManager: ICoreDataManager {
+
+
    // MARK: properties
 
    static let shared = CoreDataManager()
 
-   var container: NSPersistentContainer {
-      NSPersistentContainer(name: "CoreDataManager")
-   }
+   var container: NSPersistentContainer = .init(name: "ContainerModel")
 
    func coreSave() throws {
       do {
          try container.viewContext.save()
       } catch let e {
-         fatalError(e.localizedDescription)
+         print("Error : " + e.localizedDescription)
+         //fatalError(e.localizedDescription)
       }
    }
 
@@ -43,8 +44,7 @@ struct CoreDataManager: ICoreDataManager {
 
    // save
    func saveSingleItem<T: NSManagedObject>(object: T) {
-      var entity = T(context: container.viewContext)
-      entity = object
+      container.viewContext.insert(object)
       try? coreSave()
    }
 
@@ -76,28 +76,32 @@ struct CoreDataManager: ICoreDataManager {
       try? coreSave()
    }
 
-   // fetch
-   func fetchSingular<T: NSManagedObject>(object: T) -> T? {
-      let request = NSFetchRequest<T>(entityName: "\(object)")
-      let queue = queueGenerator("FetchQue")
-      var result: T?
-      queue.async {
-         let results = fetchRequest(request: request)
-         let accured = results?.filter { $0 == object }.first
-         DispatchQueue.main.async {
-            result = accured
-         }
+   func clearCache() {
+      let request = NSFetchRequest<Fruit>(entityName: "Fruit")
+      let results = fetchRequest(request: request)
+      if let results = results {
+         results.forEach { container.viewContext.delete($0)    }
       }
+      try? coreSave()
+
+   }
+
+   // fetch
+   func fetchSingular<T: NSManagedObject>(object: T,predicament: @escaping (T) throws -> Bool) -> T? {
+      let request = NSFetchRequest<T>(entityName: object.entity.name!)
+      let queue = queueGenerator("FetchQue")
+      let requestResult = fetchRequest(request: request)
+      let result = requestResult?.filter { try! predicament($0) }.first
+
+
       return result
    }
 
    func fetchMultiple<T>() -> [T]? where T: NSManagedObject {
-      let request = NSFetchRequest<T>(entityName: "\(T.self)")
+      let request = NSFetchRequest<T>(entityName: "Fruit")
       let queue = queueGenerator("FetchQue")
       var result : [T]?
-      queue.async {
-         result = fetchRequest(request: request)
-      }
+      result = fetchRequest(request: request)
       return result
    }
 

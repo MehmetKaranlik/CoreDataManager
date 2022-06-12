@@ -11,7 +11,7 @@ import CoreData
 struct ExampleView: View {
 
    let coreManager : CoreDataManager
-   @State var items : [Item] = []
+   @State var items : [Fruit] = []
 
    init() {
       coreManager = CoreDataManager.shared
@@ -20,11 +20,35 @@ struct ExampleView: View {
 
     var body: some View {
        List {
-
+          Button("Add Item") {
+             withAnimation {
+                let item = Fruit(context: coreManager.container.viewContext)
+                item.name = "Karpuz"
+                coreManager.saveSingleItem(object: item)
+                items = coreManager.fetchMultiple() as! [Fruit]
+             }
+          }
+          Button("Delete") {
+             withAnimation {
+                coreManager.clearCache()
+                items.removeAll()
+             }
+          }
+          ForEach(items, id: \.self) { item in
+             Text(item.name!)
+          }
        }
           .onAppear {
-             guard let results = coreManager.fetchMultiple() as? [Item] else { return }
-             items = results
+             let results = coreManager.fetchSingular(object: Fruit()) { fruit in
+                fruit.name == "Karpuz"
+             }
+             if let results = results {
+                items.append(results)
+             }
+             items.forEach { fruit in
+                print(fruit.name!)
+             }
+
 
           }
     }

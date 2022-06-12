@@ -16,8 +16,9 @@ protocol ICoreDataManager {
    func deleteSingleItem<T : NSManagedObject>(object : T)
    func deleteMultipleItem<T: NSManagedObject>(objects : [T])
    func deleteByCondition<T:NSManagedObject>(objects : [T], predicament: @escaping (T) throws -> Bool)
+   func clearCache()
    //fetch
-   func fetchSingular<T: NSManagedObject>(object : T) -> T?
+   func fetchSingular<T: NSManagedObject>(object: T,predicament: @escaping (T) throws -> Bool) -> T?
    func fetchMultiple<T : NSManagedObject>() -> [T]?
 
 
